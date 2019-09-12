@@ -2,6 +2,7 @@
 import axios from 'axios'
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import SERVER_URL from '../../constants'
 
 class Signup extends React.Component {
 	state = {
@@ -17,10 +18,27 @@ class Signup extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault()
-		console.log('Submitted!')
+		console.log('Submitted!', this.state, SERVER_URL)
+		// Send the user sign up data to the server
+		axios.post(`${SERVER_URL}/auth/signup`, this.state)
+		.then(response => {
+			console.log('SUCCESS', response)
+			// Store Token in localStorage
+			localStorage.setItem('mernToken', response.data.token)
+
+			// Update App with user info
+			this.props.updateUser()
+		})
+		.catch(err => {
+			console.log('ERROR', err.response.data.message)
+		})
 	}
 
 	render() {
+		if (this.props.user) {
+			return <Redirect to="/profile" />
+		}
+		
 		return (
 			<div>
 				<h2>Signup</h2>
