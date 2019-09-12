@@ -1,26 +1,28 @@
+// Import packages
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Resources and custom components
+import './App.css';
+import Content from './content/Content'
+import Header from './nav/Header'
+import Nav from './nav/Nav'
+
+class App extends React.Component {
+  state = {
+    user: null
+  }
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Nav user={this.state.user} />
+          <Header />
+          <Content />
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
