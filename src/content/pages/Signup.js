@@ -18,11 +18,9 @@ class Signup extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault()
-		console.log('Submitted!', this.state, SERVER_URL)
 		// Send the user sign up data to the server
 		axios.post(`${SERVER_URL}/auth/signup`, this.state)
 		.then(response => {
-			console.log('SUCCESS', response)
 			// Store Token in localStorage
 			localStorage.setItem('mernToken', response.data.token)
 
@@ -30,7 +28,9 @@ class Signup extends React.Component {
 			this.props.updateUser()
 		})
 		.catch(err => {
-			console.log('ERROR', err.response.data.message)
+			this.setState({
+				message: `${err.response.status}: ${err.response.data.message}`
+			})
 		})
 	}
 
@@ -38,7 +38,7 @@ class Signup extends React.Component {
 		if (this.props.user) {
 			return <Redirect to="/profile" />
 		}
-		
+
 		return (
 			<div>
 				<h2>Signup</h2>

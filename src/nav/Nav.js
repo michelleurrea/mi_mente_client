@@ -2,6 +2,15 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 
 class Nav extends Component {
+	handleLogout = (e) => {
+		e.preventDefault()
+		// Remove the token from localstorage (or cookies)
+		localStorage.removeItem('mernToken')
+
+		// Update the state of the App
+		this.props.updateUser()
+	}
+
 	render() {
 		let links = ''
 
@@ -11,6 +20,9 @@ class Nav extends Component {
 				<span>
 					<li>
 						<Link to="/profile">Profile</Link>
+					</li>
+					<li>
+						<a onClick={this.handleLogout}>Logout</a>
 					</li>
 				</span>
 			)
