@@ -6,16 +6,16 @@ import { BrowserRouter as Router } from 'react-router-dom'
 // Resources and custom components
 import './App.css';
 import Content from './content/Content'
-import Header from './nav/Header'
 import Nav from './nav/Nav'
 import SERVER_URL from './constants'
+import Footer from './nav/Footer'
 
 class App extends React.Component {
   state = {
     user: null
   }
 
-  compnentDidMount() {
+  componentDidMount() {
     // Go look for a token
     this.getUser()
   }
@@ -26,12 +26,10 @@ class App extends React.Component {
 
     // If there is a token, try to use it to get the user info
     if (token) {
-      console.log('token was', token)
       axios.get(`${SERVER_URL}/auth/current/user`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(response => {
-        console.log('Success', response)
         this.setState({ user: response.data.user })
       })
       .catch(err => {
@@ -48,8 +46,8 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Nav updateUser={this.getUser} user={this.state.user} />
-          <Header />
           <Content updateUser={this.getUser} user={this.state.user} />
+          <Footer />
         </div>
       </Router>
     );

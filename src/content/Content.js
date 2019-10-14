@@ -7,6 +7,10 @@ import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import NewPost from './pages/posts/NewPost'
+import UpdatePost from './pages/posts/UpdatePost'
+import ShowSinglePost from './pages/posts/ShowSinglePost'
+import AllPosts from './pages/AllPosts'
 
 const Content = props => {
 	return (
@@ -20,6 +24,18 @@ const Content = props => {
 			} />
 			<Route path="/signup" render={
 				() => <Signup user={props.user} updateUser={props.updateUser} />
+			} />
+			<Route path="/newpost" render={
+				() => <NewPost user={props.user} updateUser={props.updateUser} />
+			} />
+			<Route path="/updatepost" render={
+				(props) => <UpdatePost {...props} user={props.user} updateUser={props.updateUser} />
+			} />
+			<Route path="/post" render={
+				(props) => <ShowSinglePost {...props} user={props.user} updateUser={props.updateUser} />
+			} />
+			<Route path="/allposts" render={
+				(props) => <AllPosts {...props} user={props.user} updateUser={props.updateUser} />
 			} />
 		</div>
 	)

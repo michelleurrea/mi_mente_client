@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
+import logo from './mi_mente_logo.png'
 
 class Nav extends Component {
 	handleLogout = (e) => {
@@ -24,6 +25,12 @@ class Nav extends Component {
 					<li>
 						<a onClick={this.handleLogout}>Logout</a>
 					</li>
+					<li>
+						<Link to="/newpost">New Post</Link>
+					</li>
+					<li>
+						<Link to="/allposts">All Posts</Link>
+					</li>
 				</span>
 			)
 		}
@@ -40,14 +47,17 @@ class Nav extends Component {
 			)
 		}
 		return(
-			<nav>
-				<ul>
-					<li>
+			<div className="containerTop">
+					<Link to="/">
+						<img className="logo" src={logo} ></img>
+					</Link>
+				<nav>
+					<ul>
 						<Link to="/">Home</Link>
-					</li>
-					{links}
-				</ul>
-			</nav>
+						{links}
+					</ul>
+				</nav>
+			</div>
 		)
 	}
 }

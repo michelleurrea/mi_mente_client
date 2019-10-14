@@ -6,10 +6,12 @@ import SERVER_URL from '../../constants'
 
 class Signup extends React.Component {
 	state = {
-		firstname: '',
-		lastname: '',
+		userName: '',
+		firstName: '',
+		lastName: '',
 		email: '',
-		password: ''
+		password: '',
+		pronouns: '',
 	}
 
 	storeInput = (e) => {
@@ -36,30 +38,44 @@ class Signup extends React.Component {
 
 	render() {
 		if (this.props.user) {
-			return <Redirect to="/profile" />
+			return <Redirect to="/" />
 		}
 
 		return (
-			<div>
+			<div className="signUpForm">
 				<h2>Signup</h2>
 				<form onSubmit={this.handleSubmit}>
 					<div>
-						<label>First Name:</label>
-						<input name="firstname" placeholder="Your first name" onChange={this.storeInput} />
+						<label>Username: </label>
+						<input name="userName" placeholder="Your username" onChange={this.storeInput} />
 					</div>
+					<br></br>
 					<div>
-						<label>Last Name:</label>
-						<input name="lastname" placeholder="Your last name" onChange={this.storeInput} />
+						<label>First Name: </label>
+						<input name="firstName" placeholder="Your first name" onChange={this.storeInput} />
 					</div>
+					<br></br>
 					<div>
-						<label>Email:</label>
+						<label>Last Name: </label>
+						<input name="lastName" placeholder="Your last name" onChange={this.storeInput} />
+					</div>
+					<br></br>
+					<div>
+						<label>Email: </label>
 						<input name="email" type="email" onChange={this.storeInput} />
 					</div>
+					<br></br>
 					<div>
-						<label>Password:</label>
+						<label>Password: </label>
 						<input name="password" type="password" onChange={this.storeInput} />
 					</div>
-					<button type="submit">Sign Me Up!</button>
+					<br></br>
+					<div>
+						<label>Pronouns (comma seperated): </label>
+						<input name="pronouns" placeholder="Your pronouns" onChange={this.storeInput} />
+					</div>
+					<br></br>
+					<button type="submit">Let's get real!</button>
 				</form>
 			</div>
 		)

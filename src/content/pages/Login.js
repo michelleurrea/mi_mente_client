@@ -14,6 +14,7 @@ class Login extends React.Component {
 		e.preventDefault()
 		axios.post(`${SERVER_URL}/auth/login`, this.state)
 		.then(response => {
+			console.log(response)
 			// Store Token in localStorage
 			localStorage.setItem('mernToken', response.data.token)
 
@@ -21,7 +22,7 @@ class Login extends React.Component {
 			this.props.updateUser()
 		})
 		.catch(err => {
-			console.log('ERROR', err.response.data)
+			console.log('ERROR', err)
 			this.setState({
 				message: `${err.response.status}: ${err.response.data.message}`
 			})
@@ -34,17 +35,19 @@ class Login extends React.Component {
 		}
 		return (
 			<div>
-				<h2>Login</h2>
 				<span className="red">{this.state.message}</span>
 				<form onSubmit={this.handleSubmit}>
+					<h2>Login</h2>
 					<div>
-						<label>Email:</label>
+						<label>Email: </label>
 						<input name="email" type="email" onChange={(e) => this.setState({ email: e.target.value})} />
 					</div>
+					<br></br>
 					<div>
-						<label>Password:</label>
+						<label>Password: </label>
 						<input name="password" type="password" onChange={(e) => this.setState({ password: e.target.value, message: '' })} />
 					</div>
+					<br></br>
 					<button type="submit">Log Me In!</button>
 				</form>
 			</div>
